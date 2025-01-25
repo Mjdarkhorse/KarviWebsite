@@ -2,14 +2,14 @@
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
 
 <head>
-    @include('admin.includeAdmin.head')
+    @include('admin.head')
 
 </head>
 
 <body>
     <div id="layout-wrapper">
-        @include('admin/includeAdmin/header')
-        @include('admin/includeAdmin/sidebar')
+        @include('admin.header')
+        @include('admin.sidebar')
         <div class="vertical-overlay"></div>
         <div class="main-content">
             <div class="page-content">
@@ -168,7 +168,7 @@
             </div>
         </div>
     </div>
-    @include('admin.includeAdmin.footer')
+    @include('admin.footer')
     <script src="{{ asset('admin_assets/js/tagsinput.js') }}"></script>
 
     <script>
@@ -286,6 +286,7 @@
                 swalOptions.confirmButtonText = 'Yes, Reopen!';
             }
 
+
             Swal.fire(swalOptions).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
@@ -296,8 +297,11 @@
                             tableName: 'blogdetails',
                             status_value: status_value
                         },
+
                         dataType: 'json',
+
                         success: function(response) {
+
                             if (response && response.status === "success") {
                                 Swal.fire({
                                     icon: 'success',

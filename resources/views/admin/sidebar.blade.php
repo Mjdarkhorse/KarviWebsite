@@ -42,7 +42,7 @@
                     </a>
                     <div class="collapse menu-dropdown" id="Blog">
                         <ul class="nav nav-sm flex-column">
-                            <li class="nav-item"><a class="nav-link" href="{{ url('admin/includeAdmin/blogdetails') }}">Add Blog</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('admin/blogdetails') }}">Add Blog</a></li>
                         </ul>
                     </div>
                 </li>
@@ -53,7 +53,7 @@
                     </a>
                     <div class="collapse menu-dropdown" id="Blog">
                         <ul class="nav nav-sm flex-column">
-                            <li class="nav-item"><a class="nav-link" href="{{ url('admin/includeAdmin/packageDetails') }}">Add Package</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('packageDetails') }}">Add Package</a></li>
                         </ul>
                     </div>
                 </li>

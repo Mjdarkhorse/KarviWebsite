@@ -2,14 +2,14 @@
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
 
 <head>
-    @include('admin.includeAdmin.head')
+    @include('admin.head')
 
 </head>
 
 <body>
     <div id="layout-wrapper">
-        @include('admin/includeAdmin/header')
-        @include('admin/includeAdmin/sidebar')
+        @include('admin.header')
+        @include('admin.sidebar')
         <div class="vertical-overlay"></div>
         <div class="main-content">
             <div class="page-content">
@@ -50,7 +50,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="title">Location</label>
-                                                <input type="text" name="location" id="location" class="form-control" required oninput="updateUrl(this)">
+                                                <input type="text" name="location" id="location" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4" id="imageContainer">
@@ -127,13 +127,18 @@
                                                         <img style="height: 80px; width: 80px;" src="{{ asset('/PackageImage/' . $data->image4) }}" alt="Error">
                                                         <img style="height: 80px; width: 80px;" src="{{ asset('/PackageImage/' . $data->image5) }}" alt="Error">
                                                     </td>
-                                                    <td>{!! $data->content !!}
+                                                    <td>
+                                                        @foreach($packdetailsContents as $packdetailsContent)
+                                                        {!! $packdetailsContent->contents !!}
+                                                        @endforeach
                                                     </td>
 
                                                     <td>
                                                         <div class="d-flex align-items-center">
-                                                            <a href="" class=" btn-primary fs-18"><i class="ri-edit-2-line"></i></a>
-
+                                                            <a href="{{ url('package-details-edit/' . encrypt($data->package_details_id)) }}" class=" btn-primary fs-18"><i class="ri-edit-2-line"></i></a>
+                                                            <div class="form-check form-switch mx-4">
+                                                                <input class="form-check-input" type="checkbox" role="switch" data-id="<?= $data->package_details_id ?>" id="<?= $data->package_details_id  ?>" onclick="update_status(<?= $data->package_details_id ?>,<?= $data->status ?>,'')" <?= $data->status ? 'checked' : ''; ?>>
+                                                            </div>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -179,7 +184,7 @@
             </div>
         </div>
     </div>
-    @include('admin.includeAdmin.footer')
+    @include('admin.footer')
     <script src="{{ asset('admin_assets/js/tagsinput.js') }}"></script>
 
     <!-- for multiple text area box -->

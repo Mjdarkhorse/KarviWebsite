@@ -2,7 +2,7 @@
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
 
 <head>
-    @include('admin/includeAdmin/head')
+    @include('admin.head')
 
 
 
@@ -13,8 +13,8 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('admin/includeAdmin/header')
-        @include('admin/includeAdmin/sidebar')
+        @include('admin.header')
+        @include('admin.sidebar')
         <div class="vertical-overlay"></div>
 
         <!-- ============================================================== -->
@@ -802,7 +802,7 @@
                 </div>
 
             </div>
-            @include('admin.includeAdmin.footer')
+            @include('admin.footer')
 
 </body>
 

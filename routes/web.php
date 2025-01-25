@@ -21,15 +21,20 @@ Route::middleware(['auth'])->get('admin/dashboard', [AdminController::class, 'da
 Route::get('admin/signout', [AdminController::class, 'signout'])->name('signout');
 //--------------------Routing for Textarea(CK-Editor)----------------//
 Route::post('ckeditor/upload', [AdminController::class, 'upload'])->name('upload.upload');
+//-------------------------Routing for Status----------------------//
+Route::middleware(['auth'])->get('admin/update_status', [AdminController::class, 'update_status'])->name('updatestatus');
 
 //----------------------Routing for Blogs Details--------------//
-Route::middleware(['auth'])->get('admin/includeAdmin/blogdetails', [AdminController::class, 'blogdetails'])->name('blogdetails');
-Route::middleware(['auth'])->post('admin/blogdetailssave', [AdminController::class, 'blogdetailssave'])->name('blogdetailssave');
+Route::middleware(['auth'])->get('admin/blogdetails', [AdminController::class, 'blogdetails'])->name('admin.blogdetails');
+Route::middleware(['auth'])->post('blogdetailssave', [AdminController::class, 'blogdetailssave'])->name('blogdetailssave');
 Route::middleware(['auth'])->get('blog-details-edit/{id}', [AdminController::class, 'blog_details_edit'])->name('admin.blog_details_edit');
 Route::middleware(['auth'])->post('update-blog-details', [AdminController::class, 'blogdetailupdate'])->name('blogdetailupdate');
 //----------------------Routing for Package Details--------------//
-Route::middleware(['auth'])->get('admin/includeAdmin/packageDetails', [AdminController::class, 'packageDetails'])->name('packageDetails');
-Route::middleware(['auth'])->post('admin/includeAdmin/packageDetailsave', [AdminController::class, 'packageDetailsave'])->name('packageDetailsave');
+Route::middleware(['auth'])->get('packageDetails', [AdminController::class, 'packageDetails'])->name('packageDetails');
+Route::middleware(['auth'])->post('packageDetailsave', [AdminController::class, 'packageDetailsave'])->name('packageDetailsave');
+Route::middleware(['auth'])->get('package-details-edit/{id}', [AdminController::class, 'package_details_edit'])->name('package_details_edit');
+Route::middleware(['auth'])->post('packageDetailsupdate', [AdminController::class, 'packageDetailsupdate'])->name('packageDetailsupdate');
+
 
 
 

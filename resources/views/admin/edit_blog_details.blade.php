@@ -2,7 +2,7 @@
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
 
 <head>
-    @include('admin.includeAdmin.head')
+    @include('admin.head')
     <style>
         .toggle-container {
             display: inline-block;
@@ -61,8 +61,8 @@
 
 
     <div id="layout-wrapper">
-        @include('admin/includeAdmin/header')
-        @include('admin/includeAdmin/sidebar')
+        @include('admin.header')
+        @include('admin.sidebar')
         <div class="vertical-overlay"></div>
         <div class="main-content">
 
@@ -182,7 +182,7 @@
         </div>
     </div>
 
-    @include('admin.includeAdmin.footer')
+    @include('admin.footer')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="{{ asset('admin_aassets/js/tagsinput.js') }}"></script>
     <script>

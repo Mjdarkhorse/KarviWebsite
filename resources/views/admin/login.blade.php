@@ -2,7 +2,7 @@
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
 
 <head>
-    @include('admin/includeAdmin/head')
+    @include('admin.head')
 </head>
 
 <body>
@@ -48,7 +48,7 @@
             </div>
         </div>
     </div>
-    @include('admin/includeAdmin/footer')
+    @include('admin.footer')
     <script src="{{ asset('admin_assets/js/pages/password-addon.init.js') }}"></script>
     <script src="{{ asset('admin_assets/js/main.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

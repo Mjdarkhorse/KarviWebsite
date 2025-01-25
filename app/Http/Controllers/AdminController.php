@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
+use App\Models\Common;
 
 class AdminController extends Controller
 {
@@ -43,6 +44,31 @@ class AdminController extends Controller
         Session::flush();
         Auth::logout();
         return redirect()->route('admin.login');
+    }
+    public function update_status(Request $request)
+    {
+        //dd($request->all());
+        // exit;
+        $id_value = $request->input('id_value');
+        $tableName = $request->input('tableName');
+        $status_value = $request->input('status_value');
+
+        if ($status_value == 1) {
+            $data_update = array(
+                'status'     => 0,
+                'updated_at' => date('Y-m-d H:i:s')
+            );
+        } else {
+            $data_update = array(
+                'status' => 1,
+            );
+        }
+        $commonModel = new Common();
+        $update = $commonModel->update_status($tableName, $id_value, $data_update);
+        if ($update) {
+            $response = array('status' => 'success');
+            echo json_encode($response);
+        }
     }
 
     // For Textarea Editor File Upload
@@ -152,17 +178,20 @@ class AdminController extends Controller
     public function packageDetails(Request $request)
     {
         $packdetails = DB::table('package_details')->get();
-        return view("admin/packageDetail", compact('packdetails'));
+        $packdetailsContents = DB::table('package_details_content')
+            ->get();
+        return view("admin/packageDetail", compact('packdetails', 'packdetailsContents'));
     }
     public function packageDetailsave(Request $request)
     {
-        //dd($request->all());
+
+        // Validate the request data
         $validatedData = $request->validate([
             'title'       => 'required',
             'location'    => 'required',
             'pac_duration' => 'required|numeric|min:1',
-            'content'     => 'required|array', // Ensure 'content' is an array
-            'content.*'   => 'required', // Validate each content item is required
+            'content'     => 'required|array',
+            'content.*'   => 'required',
             'image1'      => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'image2'      => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'image3'      => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -171,9 +200,9 @@ class AdminController extends Controller
             'slug_name' => 'required',
         ]);
 
-
         $imagePaths = [];
 
+        // Handle image uploads
         for ($i = 1; $i <= 5; $i++) {
             $imageKey = "image" . $i;
             if ($request->hasFile($imageKey)) {
@@ -187,21 +216,13 @@ class AdminController extends Controller
         }
 
         $package_duration = $validatedData['pac_duration'];
-        $description_string = '';
 
-        if (!empty($validatedData['content'])) {
-            foreach ($validatedData['content'] as $description) {
-                $description_string .= $description . '<br/>';
-            }
-        }
-
-
-        DB::table('package_details')->insert([
+        // Insert data and get the insert ID
+        $packageDetailsId = DB::table('package_details')->insertGetId([
             'title'         => $validatedData['title'],
             'location'           => $validatedData['location'],
             'days'   => $package_duration,
             'slug_name'          => $validatedData['slug_name'],
-            'content'        => $description_string,
             'image1'             => $imagePaths['image1'],
             'image2'             => $imagePaths['image2'],
             'image3'             => $imagePaths['image3'],
@@ -209,10 +230,110 @@ class AdminController extends Controller
             'image5'             => $imagePaths['image5'],
             'created_at' => now(),
             'updated_at' => now(),
-
         ]);
 
 
-        return redirect()->route('packageDetail')->with('success', 'Package Details added successfully');
+        // Insert content into the package_details_content table
+        foreach ($validatedData['content'] as $content) {
+            DB::table('package_details_content')->insert([
+                'package_details_id' => $packageDetailsId,
+                'contents'            => $content,
+                'created_at'         => now(),
+                'updated_at'         => now(),
+            ]);
+        }
+
+
+        return redirect()->route('packageDetails')->with('success', 'Package Details added successfully');
+    }
+
+    public function package_details_edit(Request $req, $id)
+    {
+        $decryptedId = Crypt::decrypt($id);
+        //dd($decryptedId);
+        $packdetails = DB::table('package_details', $decryptedId)->first();
+        $packdetailsContents = DB::table('package_details_content')
+            ->where('package_details_id', $decryptedId)
+            ->get();
+        //dd($packdetailsContents);
+        return view('admin/edit_package_details', compact('packdetails', 'packdetailsContents'));
+    }
+    public function packageDetailsupdate(Request $request)
+    {
+        //dd($request->all());
+        // Validate the request data
+        $validatedData = $request->validate([
+            'package_details_id' => 'required|exists:package_details',
+            'title'              => 'required',
+            'slug_name'          => 'required',
+            'location'           => 'required',
+            'pac_duration'       => 'required|numeric|min:1',
+            'content'            => 'required|array',
+            'content.*'          => 'required',
+            'image1'             => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image2'             => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image3'             => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image4'             => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image5'             => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        ]);
+
+        $packageId = $validatedData['package_details_id'];
+
+        $imagePaths = [];
+
+        // Handle image updates
+        for ($i = 1; $i <= 5; $i++) {
+            $imageKey = "image" . $i;
+            $oldImageKey = "old_image" . $i;
+
+            if ($request->hasFile($imageKey)) {
+                $image = $request->file($imageKey);
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('PackageImage'), $imageName);
+
+                // Store new image path
+                $imagePaths[$imageKey] = $imageName;
+
+                // Delete old image if it exists
+                if (!empty($request->$oldImageKey) && file_exists(public_path('PackageImage/' . $request->$oldImageKey))) {
+                    unlink(public_path('PackageImage/' . $request->$oldImageKey));
+                }
+            } else {
+                // Keep the old image if no new image is uploaded
+                $imagePaths[$imageKey] = $request->$oldImageKey;
+            }
+        }
+
+        // Update package details in the database
+        DB::table('package_details')
+            ->where('package_details_id', $packageId)
+            ->update([
+                'title'         => $validatedData['title'],
+                'location'      => $validatedData['location'],
+                'days'          => $validatedData['pac_duration'],
+                'slug_name'     => $validatedData['slug_name'],
+                'image1'        => $imagePaths['image1'],
+                'image2'        => $imagePaths['image2'],
+                'image3'        => $imagePaths['image3'],
+                'image4'        => $imagePaths['image4'],
+                'image5'        => $imagePaths['image5'],
+                'updated_at'    => now(),
+            ]);
+
+        // Update package content
+        DB::table('package_details_content')
+            ->where('package_details_id', $packageId)
+            ->delete();
+
+        foreach ($validatedData['content'] as $content) {
+            DB::table('package_details_content')->insert([
+                'package_details_id' => $packageId,
+                'contents'           => $content,
+                'created_at'         => now(),
+                'updated_at'         => now(),
+            ]);
+        }
+
+        return redirect()->route('packageDetails')->with('success', 'Package Details updated successfully');
     }
 }
