@@ -34,7 +34,25 @@
                                     <form method="POST" action="{{ route('packageDetailsupdate') }}" id="editForm" class="row g-3" enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="package_details_id" value="{{ $packdetails->package_details_id }}">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="title">Selected City</label>
+                                                <select name="city_id" id="city_id" class="form-select mb-2 select2" required>
+                                                    <option value="">Select City</option>
+                                                    <?php
+                                                    foreach ($package_city as $data) {
+                                                        $selected = ($data->package_city_id == $packdetails->package_city_id) ? 'selected' : '';
+                                                    ?>
+                                                        <option value="<?= $data->package_city_id ?>" <?= $selected ?>>
+                                                            <?= $data->city_name ?>
+                                                        </option>
+                                                    <?php
+                                                    }
+                                                    ?>
 
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="title">Title</label>

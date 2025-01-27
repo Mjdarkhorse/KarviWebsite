@@ -33,6 +33,23 @@
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('packageDetailsave') }}" id="addForm" class="row g-3" enctype="multipart/form-data">
                                         @csrf
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="title">Select City</label>
+                                                <select name="city_id" id="city_id" class="form-select mb-2 select2" required>
+                                                    <option value="">Select City</option>
+                                                    <?php
+                                                    foreach ($package_city as $data) {
+                                                    ?>
+                                                        <option value="<?= $data->package_city_id ?>">
+                                                            <?= $data->city_name ?>
+                                                        </option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">

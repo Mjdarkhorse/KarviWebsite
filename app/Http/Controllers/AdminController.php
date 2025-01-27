@@ -177,16 +177,18 @@ class AdminController extends Controller
     }
     public function packageDetails(Request $request)
     {
+        $package_city = DB::table('package_city')->get();
         $packdetails = DB::table('package_details')->get();
         $packdetailsContents = DB::table('package_details_content')
             ->get();
-        return view("admin/packageDetail", compact('packdetails', 'packdetailsContents'));
+        return view("admin/packageDetail", compact('package_city', 'packdetails', 'packdetailsContents'));
     }
     public function packageDetailsave(Request $request)
     {
-
+        //dd($request->all());
         // Validate the request data
         $validatedData = $request->validate([
+            'city_id' => 'required',
             'title'       => 'required',
             'location'    => 'required',
             'pac_duration' => 'required|numeric|min:1',
@@ -219,6 +221,7 @@ class AdminController extends Controller
 
         // Insert data and get the insert ID
         $packageDetailsId = DB::table('package_details')->insertGetId([
+            'package_city_id'         => $validatedData['city_id'],
             'title'         => $validatedData['title'],
             'location'           => $validatedData['location'],
             'days'   => $package_duration,
@@ -251,12 +254,13 @@ class AdminController extends Controller
     {
         $decryptedId = Crypt::decrypt($id);
         //dd($decryptedId);
+        $package_city = DB::table('package_city', $decryptedId)->get();
         $packdetails = DB::table('package_details', $decryptedId)->first();
         $packdetailsContents = DB::table('package_details_content')
             ->where('package_details_id', $decryptedId)
             ->get();
         //dd($packdetailsContents);
-        return view('admin/edit_package_details', compact('packdetails', 'packdetailsContents'));
+        return view('admin/edit_package_details', compact('package_city', 'packdetails', 'packdetailsContents'));
     }
     public function packageDetailsupdate(Request $request)
     {
@@ -264,6 +268,7 @@ class AdminController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'package_details_id' => 'required|exists:package_details',
+            'city_id'              => 'required',
             'title'              => 'required',
             'slug_name'          => 'required',
             'location'           => 'required',
@@ -308,6 +313,7 @@ class AdminController extends Controller
         DB::table('package_details')
             ->where('package_details_id', $packageId)
             ->update([
+                'package_city_id'         => $validatedData['city_id'],
                 'title'         => $validatedData['title'],
                 'location'      => $validatedData['location'],
                 'days'          => $validatedData['pac_duration'],

@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
 
-<head>
-    @include('admin.head')
-</head>
+
+@include('admin.head')
+
 
 <body>
 
@@ -15,7 +15,10 @@
                         <div class="card">
                             <div class="card-body p-4">
                                 <div class="text-center">
-                                    <img src="{{ asset('admin_aassets/images/logo-ico.png') }}" alt="">
+                                    <img
+                                        src="{{ asset('admin_assets/images/logo.jpg') }}"
+                                        alt="Logo"
+                                        style="display: block; margin: 0 auto; width: 150px; height: auto;">
                                     <h5 class="text-primary mt-4">Welcome Back !</h5>
                                     <p class="text-muted">Admin Login to Karvi.</p>
                                 </div>
@@ -48,7 +51,7 @@
             </div>
         </div>
     </div>
-    @include('admin.footer')
+
     <script src="{{ asset('admin_assets/js/pages/password-addon.init.js') }}"></script>
     <script src="{{ asset('admin_assets/js/main.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -114,6 +117,7 @@
     </script>
     @endif
     </script>
+
 </body>
 
 </html>

@@ -9,10 +9,10 @@
 <body>
 
     <!-- Header section -->
-    <header>
-        @include('includeFrontend/header')
 
-    </header>
+    @include('includeFrontend/header')
+
+
     <!-- Header section end -->
 
     <!-- Navbar section -->
@@ -44,13 +44,13 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-10">
-                    <h1 class="fs-3 fw-bold">Dooars Jaldapara Gorumara</h1>
+                    <h1 class="fs-3 fw-bold">{{$packages->title}}</h1>
                     <div class="d-flex text-muted align-items-center">
                         <p class="d-flex align-items-center mb-0">
-                            <i class="fa-regular fa-compass pe-2"></i>Alipurduar
+                            <i class="fa-regular fa-compass pe-2"></i>{{$packages->location}}
                         </p>
                         <p class="d-flex align-items-center mb-0 ms-3">
-                            <i class="fa-regular fa-calendar-check pe-2"></i>2 Nights / 3 Days
+                            <i class="fa-regular fa-calendar-check pe-2"></i>{{$packages->days}}/days
                         </p>
                     </div>
                 </div>
@@ -66,28 +66,28 @@
             <div class="row gx-3 position-relative">
                 <div class="col-md-6">
                     <a href="assets/images/trending-places/darjeeling.jpg" data-fancybox="gallery">
-                        <img src="assets/images/trending-places/darjeeling.jpg" class="img-fluid main-img" alt=""> </a>
+                        <img src="{{ asset('PackageImage/' . $packages->image1) }}" class="img-fluid main-img" alt=""> </a>
                 </div>
                 <div class="col-md-6 d-none d-md-block">
                     <div class="row g-3">
                         <div class="col-sm-6 col-md-6">
                             <a href="assets/images/trending-places/digha.jpg" data-fancybox="gallery">
-                                <img src="assets/images/trending-places/digha.jpg" class="img-fluid sub-img" alt="">
+                                <img src="{{ asset('PackageImage/' . $packages->image2) }}" class="img-fluid sub-img" alt="">
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-6">
                             <a href="assets/images/trending-places/jhargram.jpg" data-fancybox="gallery">
-                                <img src="assets/images/trending-places/jhargram.jpg" class="img-fluid sub-img" alt="">
+                                <img src="{{ asset('PackageImage/' . $packages->image3) }}" class="img-fluid sub-img" alt="">
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-6">
                             <a href="assets/images/trending-places/garh.jpg" data-fancybox="gallery">
-                                <img src="assets/images/trending-places/garh.jpg" class="img-fluid sub-img" alt="">
+                                <img src="{{ asset('PackageImage/' . $packages->image4) }}" class="img-fluid sub-img" alt="">
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-6">
                             <a href="assets/images/trending-places/gangtok.jpg" data-fancybox="gallery">
-                                <img src="assets/images/trending-places/gangtok.jpg" class="img-fluid sub-img" alt="">
+                                <img src="{{ asset('PackageImage/' . $packages->image5) }}" class="img-fluid sub-img" alt="">
                             </a>
                         </div>
                     </div>
@@ -100,28 +100,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-8 pe-lg-3" data-bs-spy="scroll" data-bs-target="#list" tabindex="0">
+                    @foreach($packages_content as $con)
                     <div class="card shadow border-0 overview mb-md-5 mb-3">
                         <div class="card-body">
-                            <h3 class="title mb-0 pb-2 fs-5">DAY:1 Pick up Bagdogra Airport / NJP / New Alipuduar /Hasimara Railway Station - Drive to Phuentsholing & Night stay</h3>
-                            <p>On arrival at Pickup Bagdogra Airport / NJP / New Alipuduar /Hasimara Railway Station, you will be received by our executive, who will be waiting outside for receiving you and proceeding for Phuentsholing, through the lush green as well as most beautiful Tea garden in Dooars . On arrival at Phuentsholing, The most rapidly growing town in Bhutan, check in at hotel, evening scroll in market & Night Stay.</p>
+                            <!-- <h3 class="title mb-0 pb-2 fs-5">DAY:1 Pick up Bagdogra Airport / NJP / New Alipuduar /Hasimara Railway Station - Drive to Phuentsholing & Night stay</h3> -->
+                            <p>{!!$con->contents!!}</p>
                         </div>
                     </div>
-                    <div class="card shadow border-0 overview mb-md-5 mb-3">
-                        <div class="card-body">
-                            <h3 class="title mb-0 pb-2 fs-5">Day 2: Immigration formalities - Drive to Thimphu - Night Stay</h3>
-                            <p>After having done with your breakfast, our office executive will guide you to the immigration to complete the visa formalities and obtain it. After permit done ,we will proceed towards Thimphu, evening scroll in the market and night stay.</p>
-                            <p><b>Tashichodzong:</b> The beautiful medieval fortress/monastery which houses most of the government’s office and King’s Throne room. It is also the summer residence of Je khenpo, the Chief Abbot. The fortress is opened from 9am till 5pm during weekends and during weekdays it’s open after 5pm till 6pm.</p>
-                            <p><b>National Textile Museum:</b> National Textile Museum which was opened in June 2001 is worth a leisurely visit to get to know the living of national art of weaving. Changing exhibitions introduce the major weaving techniques, styles of local dress and textiles made by women and men. The small shop features work from the renowned weaving centre in Lhuntshe Dzongkhag, in north-eastern Bhutan.</p>
-                        </div>
-                    </div>
-                    <div class="card shadow border-0 overview mb-md-5 mb-3">
-                        <div class="card-body">
-                            <h3 class="title mb-0 pb-2 fs-5">Day 3 : Full day Thimphu Sightseeing - Night Stay</h3>
-                            <p>After having done with your breakfast, our office executive will guide you to the immigration to complete the visa formalities and obtain it. After permit done ,we will proceed towards Thimphu, evening scroll in the market and night stay.</p>
-                            <p><b>Tashichodzong:</b> The beautiful medieval fortress/monastery which houses most of the government’s office and King’s Throne room. It is also the summer residence of Je khenpo, the Chief Abbot. The fortress is opened from 9am till 5pm during weekends and during weekdays it’s open after 5pm till 6pm.</p>
-                            <p><b>National Textile Museum:</b> National Textile Museum which was opened in June 2001 is worth a leisurely visit to get to know the living of national art of weaving. Changing exhibitions introduce the major weaving techniques, styles of local dress and textiles made by women and men. The small shop features work from the renowned weaving centre in Lhuntshe Dzongkhag, in north-eastern Bhutan.</p>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
                 <!-- ENQUIRE PANEL -->
                 <div class="col-lg-4 stick-form">
@@ -202,82 +189,28 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="package-slider">
+                        @foreach($packages_tour as $packages_tours)
                         <div class="m-3 mb-4">
                             <div class="card p-3 border-0 my-shadow">
-                                <img src="assets/images/trending-places/darjeeling.jpg" class="card-img-top" alt="...">
+                                <img src="{{ asset('PackageImage/' . $packages_tours->image1) }}" class="card-img-top" alt="...">
                                 <div class="card-body p-0 pt-3">
                                     <div class="d-flex justify-content-between dets mb-2">
                                         <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-compass pe-2"></i>Alipurduar
+                                            <i class="fa-regular fa-compass pe-2"></i>{{$packages_tours->location}}
                                         </p>
                                         <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-calendar-check pe-2"></i>2 Nights / 3 Days
+                                            <i class="fa-regular fa-calendar-check pe-2"></i>{{$packages_tours->days}}/days
                                         </p>
                                     </div>
                                     <div class="pt-2 text-center">
-                                        <h4 class="card-title fw-medium">Dooars Jaldapara Gorumara</h4>
-                                        <a href="javascript:void(0);" class="btn1">Explore Now</a>
+                                        <h4 class="card-title fw-medium">{{$packages_tours->title}}</h4>
+                                        <a href="{{route('packages_tour_details',['slug_name' => $packages_tours->slug_name, 'id' => $packages_tours->package_details_id ]) }}" class="btn1">Explore Now</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="m-3 mb-4">
-                            <div class="card p-3 border-0 my-shadow">
-                                <img src="assets/images/trending-places/jhargram.jpg" class="card-img-top" alt="...">
-                                <div class="card-body p-0 pt-3">
-                                    <div class="d-flex justify-content-between dets mb-2">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-compass pe-2"></i>Bhutan
-                                        </p>
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-calendar-check pe-2"></i>2 days / 3 nights
-                                        </p>
-                                    </div>
-                                    <div class="pt-2 text-center">
-                                        <h4 class="card-title fw-medium">Amazing Bhutan with Chele La Excursion</h4>
-                                        <a href="javascript:void(0);" class="btn1">Explore Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="m-3 mb-4">
-                            <div class="card p-3 border-0 my-shadow">
-                                <img src="assets/images/trending-places/digha.jpg" class="card-img-top" alt="...">
-                                <div class="card-body p-0 pt-3">
-                                    <div class="d-flex justify-content-between dets mb-2">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-compass pe-2"></i>Derjeeling
-                                        </p>
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-calendar-check pe-2"></i>2 days / 3 nights
-                                        </p>
-                                    </div>
-                                    <div class="pt-2 text-center">
-                                        <h4 class="card-title fw-medium">Darjeeling Pelling Tour Plan</h4>
-                                        <a href="javascript:void(0);" class="btn1">Explore Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="m-3 mb-4">
-                            <div class="card p-3 border-0 my-shadow">
-                                <img src="assets/images/trending-places/gangtok.jpg" class="card-img-top" alt="...">
-                                <div class="card-body p-0 pt-3">
-                                    <div class="d-flex justify-content-between dets mb-2">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-compass pe-2"></i>Sikkim
-                                        </p>
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-calendar-check pe-2"></i>2 days / 3 nights
-                                        </p>
-                                    </div>
-                                    <div class="pt-2 text-center">
-                                        <h4 class="card-title fw-medium">East Sikkim Tour(Silk Route)</h4>
-                                        <a href="javascript:void(0);" class="btn1">Explore Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -347,11 +280,11 @@
     </div>
 
 
-    <script src="assets/js/bootstrap.bundle.js"></script>
-    <script src="assets/js/jquery-plugin-collection.js"></script>
-    <script src="assets/js/slick.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.js"></script>
+    <script src="/assets/js/jquery-plugin-collection.js"></script>
+    <script src="/assets/js/slick.min.js"></script>
     <!-- <script src="assets/js/jquery.fancybox.min.js"></script> -->
-    <script src="assets/js/scripts.js"></script>
+    <script src="/assets/js/scripts.js"></script>
 </body>
 
 </html>

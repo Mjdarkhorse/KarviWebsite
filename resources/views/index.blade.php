@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
- @include('includeFrontend/head')
+    @include('includeFrontend/head')
 
 </head>
+
 <body>
 
     <!-- Header section -->
-   @include('includeFrontend/header')
+    @include('includeFrontend/header')
     <!-- Header section end -->
 
     <!-- Navbar section -->
-    
+
     <!-- Navbar section end  -->
 
     <!-- Banner section -->
@@ -112,25 +114,25 @@
             </div>
             <div class="row g-md-4 g-3">
                 <div class="col-lg-6">
-                    <a href="bhutan.html" class="inner-contain d-block">
+                    <a href="{{ route('city', ['id' => encrypt(1)]) }}" class="inner-contain d-block">
                         <img src="assets/images/destination/bhutan.jpg" class="img-fluid" alt="">
                         <h5 class="mb-0">Bhutan</h5>
                     </a>
                 </div>
                 <div class="col-lg-6">
-                    <a href="sikkim.html" class="inner-contain d-block">
+                    <a href="{{ route('city', ['id' => encrypt(2)]) }}" class="inner-contain d-block">
                         <img src="assets/images/destination/sikkim.jpg" class="img-fluid" alt="">
                         <h5 class="mb-0">Sikkim</h5>
                     </a>
                 </div>
                 <div class="col-lg-6">
-                    <a href="darjeeling.html" class="inner-contain d-block">
+                    <a href="{{ route('city', ['id' => encrypt(3)]) }}" class="inner-contain d-block">
                         <img src="assets/images/destination/darjeeling.jpg" class="img-fluid" alt="">
                         <h5 class="mb-0">Darjeeling</h5>
                     </a>
                 </div>
                 <div class="col-lg-6">
-                    <a href="dooars.html" class="inner-contain d-block">
+                    <a href="{{ route('city', ['id' => encrypt(4)]) }}" class="inner-contain d-block">
                         <img src="assets/images/destination/dooars.jpg" class="img-fluid" alt="">
                         <h5 class="mb-0">Dooars</h5>
                     </a>
@@ -181,82 +183,28 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="package-slider">
+                        @foreach($packages_tour as $tour)
                         <div class="m-3 mb-4">
                             <div class="card p-3 border-0 my-shadow">
-                                <img src="assets/images/trending-places/darjeeling.jpg" class="card-img-top" alt="...">
+                                <img src="{{ asset('PackageImage/' . $tour->image1) }}" class="card-img-top" alt="...">
                                 <div class="card-body p-0 pt-3">
                                     <div class="d-flex justify-content-between dets mb-2">
                                         <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-compass pe-2"></i>Alipurduar
+                                            <i class="fa-regular fa-compass pe-2"></i>{{$tour->location}}
                                         </p>
                                         <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-calendar-check pe-2"></i>2 Nights / 3 Days
+                                            <i class="fa-regular fa-calendar-check pe-2"></i>{{$tour->days}}/Days
                                         </p>
-                                    </div>                                    
+                                    </div>
                                     <div class="pt-2 text-center">
-                                        <h4 class="card-title fw-medium">Dooars Jaldapara Gorumara</h4>
-                                         <a href="javascript:void(0);" class="btn1">Explore Now</a>
+                                        <h4 class="card-title fw-medium">{{$tour->title}}</h4>
+                                        <a href="{{route('packages_tour_details',['slug_name' => $tour->slug_name, 'id' => $tour->package_details_id ]) }}" class="btn1">Explore Now</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="m-3 mb-4">
-                            <div class="card p-3 border-0 my-shadow">
-                                <img src="assets/images/trending-places/jhargram.jpg" class="card-img-top" alt="...">
-                                <div class="card-body p-0 pt-3">
-                                    <div class="d-flex justify-content-between dets mb-2">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-compass pe-2"></i>Bhutan
-                                        </p>
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-calendar-check pe-2"></i>2 days / 3 nights
-                                        </p>
-                                    </div>
-                                    <div class="pt-2 text-center">
-                                        <h4 class="card-title fw-medium">Amazing Bhutan with Chele La Excursion</h4>
-                                         <a href="javascript:void(0);" class="btn1">Explore Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="m-3 mb-4">
-                            <div class="card p-3 border-0 my-shadow">
-                                <img src="assets/images/trending-places/digha.jpg" class="card-img-top" alt="...">
-                                <div class="card-body p-0 pt-3">
-                                    <div class="d-flex justify-content-between dets mb-2">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-compass pe-2"></i>Derjeeling
-                                        </p>
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-calendar-check pe-2"></i>2 days / 3 nights
-                                        </p>
-                                    </div>
-                                    <div class="pt-2 text-center">
-                                        <h4 class="card-title fw-medium">Darjeeling Pelling Tour Plan</h4>
-                                         <a href="javascript:void(0);" class="btn1">Explore Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="m-3 mb-4">
-                            <div class="card p-3 border-0 my-shadow">
-                                <img src="assets/images/trending-places/gangtok.jpg" class="card-img-top" alt="...">
-                                <div class="card-body p-0 pt-3">
-                                    <div class="d-flex justify-content-between dets mb-2">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-compass pe-2"></i>Sikkim
-                                        </p>
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-calendar-check pe-2"></i>2 days / 3 nights
-                                        </p>
-                                    </div>
-                                    <div class="pt-2 text-center">
-                                        <h4 class="card-title fw-medium">East Sikkim Tour(Silk Route)</h4>
-                                         <a href="javascript:void(0);" class="btn1">Explore Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -279,7 +227,6 @@
                         <div class="row align-items-center justify-content-between">
                             <div class="col-lg-4 col-3">
                                 <div class="img-contain">
-                                    <?xml version="1.0" encoding="UTF-8"?>
                                     <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 512 512"
                                         width="512" height="512">
                                         <path
@@ -403,7 +350,7 @@
                         <div class="row align-items-center justify-content-between">
                             <div class="col-lg-4 col-3">
                                 <div class="img-contain">
-                                    <?xml version="1.0" encoding="iso-8859-1"?>
+
                                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 496 496"
                                         style="enable-background:new 0 0 496 496;" xml:space="preserve">
@@ -617,7 +564,7 @@
     <!-- //End -->
 
     <!-- Footer section -->
-      @include('includeFrontend/footer')
+    @include('includeFrontend/footer')
     <!-- Footer section end -->
 
 
@@ -643,7 +590,7 @@
                                                     class="form-control">
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-12">
                                             <div class="d-flex">
                                                 <input type="text" name="" id="" placeholder="Phone Number"

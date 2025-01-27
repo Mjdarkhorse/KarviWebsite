@@ -67,7 +67,7 @@
                             <div class="pt-2 text-center">
                                 <h4 class="card-title fw-medium">{{$blogs->blog_title}}</h4>
                                 <p>{!!$blogs->description!!}</p>
-                                <a href="{{route('blog-details',['slug_name' => $blogs->slug_name]) }}" class="btn1">Read More</a>
+                                <a href="{{route('blog-details',['slug_name' => $blogs->slug_name,'id'=> $blogs->package_details_id]) }}" class="btn1">Read More</a>
                             </div>
                         </div>
                     </div>

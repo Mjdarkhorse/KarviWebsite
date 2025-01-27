@@ -2,18 +2,18 @@
     <div class="navbar-brand-box">
         <a href="/" class="logo logo-dark">
             <span class="logo-sm">
-                <img src="{{ asset('admin_assets/images/logo-sm.svg') }}" alt="" height="40">
+                <img src="{{ asset('admin_assets/images/logo.jpg') }}" alt="" height="40">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset('admin_assets/images/logo-dark.svg') }}" alt="" height="60">
+                <img src="{{ asset('admin_assets/images/logo.jpg') }}" alt="" height="60">
             </span>
         </a>
         <a href="/" class="logo logo-light">
             <span class="logo-sm">
-                <img src="{{ asset('admin_assets/images/logo-sm.svg') }}" alt="" height="40">
+                <img src="{{ asset('admin_assets/images/logo.jpg') }}" alt="" height="40">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset('admin_assets/images/logo-ico.png') }}" alt="" height="60">
+                <img src="{{ asset('admin_assets/images/logo.jpg') }}" alt="" height="60">
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">

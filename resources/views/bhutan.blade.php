@@ -30,8 +30,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-7">
-                        <h1>Bhutan</h1>
-                        <p class="mb-0 bread"><a href="index.html" class="my-primary-color">Home</a> / Bhutan</p>
+                        <h1>{{$cityName}}</h1>
+                        <p class="mb-0 bread"><a href="{{route('index')}}" class="my-primary-color">Home</a> / {{$cityName}}</p>
                     </div>
                 </div>
             </div>
@@ -47,89 +47,35 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h3 class="sub-title mb-2 my-primary-color">Bhutan Travel Packages</h3>
+                    <h3 class="sub-title mb-2 my-primary-color">{{$cityName}} Travel Packages</h3>
                     <h2 class="title">Ultimate Travel Experience</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8">
                     <div class="row justify-content-center g-4">
+                        @foreach($packages_tour as $packages_tours)
                         <div class="col-md-6">
                             <div class="card p-3 border-0 my-shadow">
-                                <img src="assets/images/trending-places/darjeeling.jpg" class="card-img-top" alt="...">
+                                <img src="{{ asset('PackageImage/' . $packages_tours->image1) }}" class="card-img-top" alt="...">
                                 <div class="card-body p-0 pt-3">
                                     <div class="d-flex justify-content-between dets mb-2">
                                         <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-compass pe-2"></i>Alipurduar
+                                            <i class="fa-regular fa-compass pe-2"></i>{{$packages_tours->location}}
                                         </p>
                                         <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-calendar-check pe-2"></i>2 Nights / 3 Days
+                                            <i class="fa-regular fa-calendar-check pe-2"></i>{{$packages_tours->days}}/Days
                                         </p>
                                     </div>
                                     <div class="pt-2 text-center">
-                                        <h4 class="card-title fw-medium">Dooars Jaldapara Gorumara</h4>
-                                        <a href="dooars-tour.html" class="btn1">Explore Now</a>
+                                        <h4 class="card-title fw-medium">{{$packages_tours->title}}</h4>
+                                        <a href="{{route('packages_tour_details',['slug_name' => $packages_tours->slug_name, 'id' => $packages_tours->package_details_id ]) }}" class="btn1">Explore Now</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="card p-3 border-0 my-shadow">
-                                <img src="assets/images/trending-places/jhargram.jpg" class="card-img-top" alt="...">
-                                <div class="card-body p-0 pt-3">
-                                    <div class="d-flex justify-content-between dets mb-2">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-compass pe-2"></i>Bhutan
-                                        </p>
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-calendar-check pe-2"></i>2 days / 3 nights
-                                        </p>
-                                    </div>
-                                    <div class="pt-2 text-center">
-                                        <h4 class="card-title fw-medium">Amazing Bhutan with Chele La Excursion</h4>
-                                        <a href="javascript:void(0);" class="btn1">Explore Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card p-3 border-0 my-shadow">
-                                <img src="assets/images/trending-places/digha.jpg" class="card-img-top" alt="...">
-                                <div class="card-body p-0 pt-3">
-                                    <div class="d-flex justify-content-between dets mb-2">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-compass pe-2"></i>Derjeeling
-                                        </p>
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-calendar-check pe-2"></i>2 days / 3 nights
-                                        </p>
-                                    </div>
-                                    <div class="pt-2 text-center">
-                                        <h4 class="card-title fw-medium">Darjeeling Pelling Tour Plan</h4>
-                                        <a href="javascript:void(0);" class="btn1">Explore Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card p-3 border-0 my-shadow">
-                                <img src="assets/images/trending-places/gangtok.jpg" class="card-img-top" alt="...">
-                                <div class="card-body p-0 pt-3">
-                                    <div class="d-flex justify-content-between dets mb-2">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-compass pe-2"></i>Sikkim
-                                        </p>
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="fa-regular fa-calendar-check pe-2"></i>2 days / 3 nights
-                                        </p>
-                                    </div>
-                                    <div class="pt-2 text-center">
-                                        <h4 class="card-title fw-medium">East Sikkim Tour(Silk Route)</h4>
-                                        <a href="javascript:void(0);" class="btn1">Explore Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+
                     </div>
                     <div class="d-flex justify-content-center">
                         <a href="" class="btn2 mt-5">View more</a>
